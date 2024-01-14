@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { AppBar, Toolbar, Typography, Button, Grid, useTheme, Box, } from '@mui/material';
 import { PhoneAndroidOutlined, HeadphonesOutlined, LocalOfferOutlined } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import ItemsNavbar from '../Dropdown/ItemsNavbar/ItemsNavbar.jsx';
 import CartWidget from '../../CartWidget/CartWidget.jsx';
+import CartContext from '../../../context/CartContext/CartContext.jsx';
 
 const NavBar = ({ showDropdown }) => {
+
+      const { totalQuantity, totalPrice } = useContext(CartContext);
 
       const theme = useTheme();
 
@@ -75,11 +78,11 @@ const NavBar = ({ showDropdown }) => {
                                                 marginRight: "0.5rem",
                                                 marginTop: "0.25rem",
                                           }}>
-                                                0 item(s) - $0
+                                                {totalQuantity} item(s) - ${totalPrice}
 
                                           </Typography>
 
-                                          <CartWidget totalQuantity={2} />
+                                          <CartWidget />
 
                                     </Box>
 

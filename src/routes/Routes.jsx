@@ -3,6 +3,9 @@ import ItemListContainer from "../components/ItemListContainer/ItemListContainer
 import ItemDetailContainer from "../components/ItemDetailContainer/ItemDetailContainer.jsx";
 import Carousel from "../components/Carousel/Carousel.jsx";
 import Footer from "../components/Footer/Footer.jsx";
+import Register from "../components/Users/Register/Register.jsx";
+import Login from "../components/Users/Login/Login.jsx";
+import Profile from "../components/Users/Profile/Profile.jsx";
 
 export default function AppRoutes() {
 
@@ -10,6 +13,9 @@ export default function AppRoutes() {
             <Routes>
                   <Route path="/PFAlvarez-React" element={
                         <>
+                              <Register />
+                              <Login />
+                              <Profile />
                               <Carousel prop="Aqui va el carousel" />
                               <ItemListContainer />
                               <Footer />

@@ -1,40 +1,107 @@
+export const fetchRegister = async (user) => {
+
+
+      const response = await fetch('https://pfalvarez-production.up.railway.app/api/users/register', {
+
+            method: 'POST',
+            headers: {
+                  'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                  ...user
+            }),
+            credentials: 'include'
+
+      })
+
+      const data = await response.json();
+
+
+      if (response.status === 200 || response.status === 201) {
+
+            console.log(data);
+
+            return data;
+
+      } else {
+
+            throw new Error(data.error);
+
+      }
+
+}
+
 export const fetchLogin = async (email, password) => {
 
-      try {
+      const response = await fetch('https://pfalvarez-production.up.railway.app/api/users/login', {
+            method: 'POST',
+            headers: {
+                  'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                  email,
+                  password
+            }),
+            credentials: 'include'
+      });
 
-            const response = await fetch('https://pfalvarez-production.up.railway.app/api/users/login', {
-                  method: 'POST',
-                  headers: {
-                        'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify({
-                        email,
-                        password
-                  }),
-                  credentials: 'include'
-            });
+      const data = await response.json();
 
-            const data = await response.json();
+      console.log(response.status)
 
-            if (response.ok) {
+      console.log(response)
 
-                  return data;
+      console.log(data)
 
-            } else {
+      if (response.status === '200: OK' || response.status === 200) {
 
-                  throw new Error(data.message);
+            return data;
 
-            }
+      } else {
 
-      } catch (error) {
+            console.log(data.error)
 
-            console.log(error);
-            return error;
+            throw new Error(data.error);
 
       }
 
 
 };
+
+export const fetchUpdateUser = async (user) => {
+
+      const response = await fetch('https://pfalvarez-production.up.railway.app/api/users/update', {
+            method: 'PUT',
+            headers: {
+                  'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                  ...user
+            }),
+            credentials: 'include'
+      });
+
+      const data = await response.json();
+
+      console.log(response.status)
+
+      console.log(response)
+
+      console.log(data)
+
+      if (response.status === '200: OK' || response.status === 200) {
+
+            return data;
+
+      } else {
+
+            throw new Error(data.error);
+
+      }
+
+}
+
+
 
 export const fetchProducts = async (sId) => {
 

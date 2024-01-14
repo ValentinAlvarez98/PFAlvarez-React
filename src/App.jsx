@@ -4,16 +4,22 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import AppRoutes from './routes/Routes.jsx';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './components/Theme/Theme.jsx';
+import { CartProvider } from './context/CartContext/CartContext.jsx';
+import { LoginProvider } from './context/LoginContext/LoginContext.jsx';
 
 function App() {
 
   return (
     <>
       <ThemeProvider theme={theme}>
-        <Router>
-          <Header />
-          <AppRoutes />
-        </Router>
+        <LoginProvider>
+          <CartProvider>
+            <Router>
+              <Header />
+              <AppRoutes />
+            </Router>
+          </CartProvider>
+        </LoginProvider>
       </ThemeProvider>
     </>
   )

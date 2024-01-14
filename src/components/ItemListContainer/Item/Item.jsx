@@ -1,8 +1,19 @@
+import React, { useContext } from "react";
 import { Grid, Button, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import FlipperImg from "../../FlipperImg/FlipperImg";
+import CartContext from "../../../context/CartContext/CartContext.jsx";
 
 const Item = ({ product }) => {
+
+    const { addProduct } = useContext(CartContext);
+
+    const handleAddToCart = () => {
+
+        const quantity = 1;
+        addProduct(product, quantity);
+
+    }
 
     const theme = useTheme();
 
@@ -88,7 +99,9 @@ const Item = ({ product }) => {
 
             <Button
                 variant="contained"
-                sx={styledItem.styledButton}>
+                sx={styledItem.styledButton}
+                onClick={handleAddToCart}
+            >
                 Agregar al carrito
             </Button>
 
