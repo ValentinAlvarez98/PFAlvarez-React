@@ -1,38 +1,20 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import ItemListContainer from "../components/ItemListContainer/ItemListContainer.jsx";
-import ItemDetailContainer from "../components/ItemDetailContainer/ItemDetailContainer.jsx";
-import Carousel from "../components/Carousel/Carousel.jsx";
-import Footer from "../components/Footer/Footer.jsx";
-import Register from "../components/Users/Register/Register.jsx";
-import Login from "../components/Users/Login/Login.jsx";
-import Profile from "../components/Users/Profile/Profile.jsx";
+import HomePage from "../components/Pages/HomePage.jsx";
+import LoginPage from "../components/Pages/LoginPage.jsx";
+import ProfilePage from "../components/Pages/ProfilePage.jsx";
+import ItemListPage from "../components/Pages/ItemListPage.jsx";
+import ItemDetailPage from "../components/Pages/ItemDetailPage.jsx";
+
 
 export default function AppRoutes() {
 
       return (
             <Routes>
-                  <Route path="/PFAlvarez-React" element={
-                        <>
-                              <Register />
-                              <Login />
-                              <Profile />
-                              <Carousel prop="Aqui va el carousel" />
-                              <ItemListContainer />
-                              <Footer />
-                        </>
-                  } />
-                  <Route path="/PFAlvarez-React/:sId" element={
-                        <>
-                              <ItemListContainer />
-                              <Footer />
-                        </>
-                  } />
-                  <Route path="/PFAlvarez-React/:cId/:p_id" element={
-                        <>
-                              <ItemDetailContainer />
-                              <Footer />
-                        </>
-                  } />
+                  <Route path="/PFAlvarez-React" element={<HomePage />} />
+                  <Route path="/PFAlvarez-React/login" element={<LoginPage />} />
+                  <Route path="/PFAlvarez-React/profile" element={<ProfilePage />} />
+                  <Route path="/PFAlvarez-React/:sId" element={<ItemListPage />} />
+                  <Route path="/PFAlvarez-React/:cId/:p_id" element={<ItemDetailPage />} />
                   <Route path="*" element={<Navigate to="/PFAlvarez-React" />} />
             </Routes>
       );

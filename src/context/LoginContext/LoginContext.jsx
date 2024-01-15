@@ -23,8 +23,6 @@ export const LoginProvider = ({ children }) => {
 
             setIsError(false)
 
-            setIsAuthenticated(false)
-
             try {
 
                   const { payload, token, message } = await fetchLogin(email, password)
@@ -50,6 +48,14 @@ export const LoginProvider = ({ children }) => {
 
                   setIsLoading(false)
 
+                  setTimeout(() => {
+
+                        setMessage(null)
+
+                        setError(null)
+
+                  }, 2000);
+
             };
 
       }
@@ -59,8 +65,6 @@ export const LoginProvider = ({ children }) => {
             setIsLoading(true)
 
             setIsError(false)
-
-            setIsAuthenticated(false)
 
             try {
 
@@ -81,6 +85,14 @@ export const LoginProvider = ({ children }) => {
             } finally {
 
                   setIsLoading(false)
+
+                  setTimeout(() => {
+
+                        setMessage(null)
+
+                        setError(null)
+
+                  }, 2000);
 
             };
 
@@ -114,16 +126,26 @@ export const LoginProvider = ({ children }) => {
 
                   setIsLoading(false)
 
+                  setTimeout(() => {
+
+                        setMessage(null)
+
+                        setError(null)
+
+                  }, 2000);
+
+
             };
 
       }
 
 
-      const logout = () => {
+      const logout = async () => {
 
             setCurrentUser(null)
 
             setIsAuthenticated(false)
+
       }
 
       return (

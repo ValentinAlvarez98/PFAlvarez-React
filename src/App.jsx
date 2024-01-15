@@ -1,5 +1,6 @@
 import React from 'react'
 import Header from './components/Header/Header.jsx'
+import Footer from './components/Footer/Footer.jsx';
 import { BrowserRouter as Router } from 'react-router-dom';
 import AppRoutes from './routes/Routes.jsx';
 import { ThemeProvider } from '@mui/material/styles';
@@ -17,6 +18,7 @@ function App() {
             <Router>
               <Header />
               <AppRoutes />
+              <Footer />
             </Router>
           </CartProvider>
         </LoginProvider>

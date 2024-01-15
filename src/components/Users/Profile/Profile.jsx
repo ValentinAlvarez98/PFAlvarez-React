@@ -60,6 +60,8 @@ const Profile = () => {
 
             logout()
 
+            alert('Hasta pronto!')
+
       }
 
       return (
