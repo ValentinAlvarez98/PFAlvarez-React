@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from './components/Header/Header.jsx'
 import Footer from './components/Footer/Footer.jsx';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, HashRouter } from 'react-router-dom';
 import AppRoutes from './routes/Routes.jsx';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './components/Theme/Theme.jsx';
@@ -15,11 +15,11 @@ function App() {
       <ThemeProvider theme={theme}>
         <LoginProvider>
           <CartProvider>
-            <Router>
+            <HashRouter>
               <Header />
               <AppRoutes />
               <Footer />
-            </Router>
+            </HashRouter>
           </CartProvider>
         </LoginProvider>
       </ThemeProvider>
