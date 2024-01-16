@@ -1,13 +1,34 @@
 import React, { createContext, useState } from 'react'
-import { fetchLogin, fetchRegister, fetchUpdateUser } from '../../hooks/useFetch/useFetch.js'
+import { fetchLogin, fetchRegister, fetchUpdateUser, fetchChechSession, fetchLogout } from '../../hooks/useFetch/useFetch.js'
 
-export const LoginContext = createContext(null)
+export const LoginContext = createContext({
+
+      currentUser: null,
+
+      isAuthenticated: false,
+
+      isError: false,
+
+      isLoading: false,
+
+      error: null,
+
+      message: null,
+
+      login: () => { },
+
+      register: () => { },
+
+      logout: () => { },
+
+      update: () => { },
+
+      checkSession: () => { }
+})
 
 export const LoginProvider = ({ children }) => {
 
       const [currentUser, setCurrentUser] = useState(null)
-
-      const [isAuthenticated, setIsAuthenticated] = useState(false)
 
       const [isError, setIsError] = useState(false)
 
@@ -17,6 +38,8 @@ export const LoginProvider = ({ children }) => {
 
       const [message, setMessage] = useState(null)
 
+      const [isAuthenticated, setAuthenticated] = useState(false)
+
       const login = async (email, password) => {
 
             setIsLoading(true)
@@ -25,13 +48,12 @@ export const LoginProvider = ({ children }) => {
 
             try {
 
-                  const { payload, token, message } = await fetchLogin(email, password)
+                  const { payload, message } = await fetchLogin(email, password)
 
                   setMessage(message)
 
                   setCurrentUser(payload)
 
-                  setIsAuthenticated(true)
 
 
             } catch (error) {
@@ -45,6 +67,12 @@ export const LoginProvider = ({ children }) => {
                   setError(errorMessage)
 
             } finally {
+
+                  const { payload, message } = await fetchChechSession()
+
+                  setMessage(message);
+
+                  console.log(payload, message)
 
                   setIsLoading(false)
 
@@ -139,12 +167,88 @@ export const LoginProvider = ({ children }) => {
 
       }
 
+      const checkSession = async () => {
+
+            setIsLoading(true)
+
+            setIsError(false)
+
+            try {
+
+                  const { payload, message } = await fetchChechSession()
+
+                  setAuthenticated(payload.isAuthenticaded);
+
+                  setMessage(message)
+
+            } catch (error) {
+
+                  const toString = error.toString()
+
+                  const errorMessage = toString.slice(9, toString.length - 2)
+
+                  setIsError(true)
+
+                  setError(errorMessage)
+
+                  setAuthenticated(false);
+
+            } finally {
+
+                  setIsLoading(false)
+
+                  setTimeout(() => {
+
+                        setMessage(null)
+
+                        setError(null)
+
+                  }, 2000);
+
+            };
+
+      }
+
 
       const logout = async () => {
 
-            setCurrentUser(null)
+            setIsLoading(true)
 
-            setIsAuthenticated(false)
+            setIsError(false)
+
+            try {
+
+                  const { payload, message } = await fetchLogout()
+
+                  setMessage(message)
+
+                  setAuthenticated(false);
+
+                  setCurrentUser(null)
+
+            } catch (error) {
+
+                  const toString = error.toString()
+
+                  const errorMessage = toString.slice(9, toString.length - 2)
+
+                  setIsError(true)
+
+                  setError(errorMessage)
+
+            } finally {
+
+                  setIsLoading(false)
+
+                  setTimeout(() => {
+
+                        setMessage(null)
+
+                        setError(null)
+
+                  }, 2000);
+
+            };
 
       }
 
@@ -152,7 +256,7 @@ export const LoginProvider = ({ children }) => {
 
             <LoginContext.Provider value={{
                   currentUser,
-                  isAuthenticated,
+                  isAuthenticated: isAuthenticated,
                   isError,
                   isLoading,
                   error,
@@ -160,7 +264,8 @@ export const LoginProvider = ({ children }) => {
                   login,
                   register,
                   logout,
-                  update
+                  update,
+                  checkSession
             }}>
 
                   {children}

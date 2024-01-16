@@ -31,6 +31,39 @@ export const fetchRegister = async (user) => {
 
 }
 
+export const fetchUpdateUser = async (user) => {
+
+      const response = await fetch('https://pfalvarez-production.up.railway.app/api/users/update', {
+            method: 'PUT',
+            headers: {
+                  'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                  ...user
+            }),
+            credentials: 'include'
+      });
+
+      const data = await response.json();
+
+      console.log(response.status)
+
+      console.log(response)
+
+      console.log(data)
+
+      if (response.status === '200: OK' || response.status === 200) {
+
+            return data;
+
+      } else {
+
+            throw new Error(data.error);
+
+      }
+
+}
+
 export const fetchLogin = async (email, password) => {
 
       const response = await fetch('https://pfalvarez-production.up.railway.app/api/users/login', {
@@ -68,16 +101,37 @@ export const fetchLogin = async (email, password) => {
 
 };
 
-export const fetchUpdateUser = async (user) => {
+export const fetchLogout = async () => {
 
-      const response = await fetch('https://pfalvarez-production.up.railway.app/api/users/update', {
-            method: 'PUT',
-            headers: {
-                  'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                  ...user
-            }),
+      const response = await fetch('https://pfalvarez-production.up.railway.app/api/users/logout', {
+            method: 'POST',
+            credentials: 'include'
+      });
+
+      const data = await response.json();
+
+      console.log(response.status)
+
+      console.log(response)
+
+      console.log(data)
+
+      if (response.status === '200: OK' || response.status === 200) {
+
+            return data;
+
+      } else {
+
+            throw new Error(data.error);
+
+      }
+
+};
+
+export const fetchChechSession = async () => {
+
+      const response = await fetch('https://pfalvarez-production.up.railway.app/api/users/session', {
+            method: 'GET',
             credentials: 'include'
       });
 
@@ -100,8 +154,6 @@ export const fetchUpdateUser = async (user) => {
       }
 
 }
-
-
 
 export const fetchProducts = async (sId) => {
 

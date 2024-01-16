@@ -10,7 +10,7 @@ const Login = () => {
             isLoading,
             isError,
             currentUser,
-            isAuthenticated,
+            checkSession
       } = useContext(LoginContext)
 
       const [user, setUser] = useState({
@@ -30,7 +30,11 @@ const Login = () => {
 
             console.log(currentUser)
 
-            console.log(isAuthenticated)
+            setTimeout(() => {
+
+                  checkSession()
+
+            }, 1500)
 
       }
 
